@@ -41,15 +41,21 @@ weighted_cosine_similarity /= sum(weights.values())
 #print the weighted cosine similarity
 print("Weighted cosine similarity:", weighted_cosine_similarity)
 
-missing_keyword_penalty = 1.0/len(req_keywords)
+missing_keyword_penalty = 0.1/len(req_keywords)
 
 
-# Apply penalty if no keywords match
+# Calculate the set difference of missing keywords
 req_keywords = re.findall(r"Keywords: (.+)", funding_requirements)[0].split(", ")
-if any(keyword in student_profile for keyword in req_keywords):
-    matching_percentage = max(0, weighted_cosine_similarity - missing_keyword_penalty)
-else:
-    matching_percentage = weighted_cosine_similarity - missing_keyword_penalty
+missing_keywords = set(req_keywords) - set(re.findall(r"Keywords: (.+)", student_profile)[0].split(", "))
+
+# Apply penalty for missing keywords
+missing_keywords_penalty = len(missing_keywords) * missing_keyword_penalty
+
+print("Missing keywords penalty:", missing_keywords_penalty)
+
+# Calculate the matching percentage
+matching_percentage = max(0, weighted_cosine_similarity - missing_keywords_penalty)
+
 if profile_cgpa < req_cgpa:
     matching_percentage = 0
     print("CGPA is too low")
@@ -58,3 +64,5 @@ if profile_gre < req_gre:
     print("GRE is too low")
 
 print("Matching percentage:", matching_percentage)
+#print the missing keywords
+print("Missing keywords:", missing_keywords)
