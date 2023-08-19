@@ -17,6 +17,8 @@ class FundingModel(db.Model):
     professor_id = db.Column(db.Integer, db.ForeignKey('professor.id'), nullable=False)
     availability = db.Column(db.Boolean, nullable=False)
 
+    ongoingresearch = db.relationship('OnGoingResearchModel', backref='fundingmodel', cascade='all, delete')
+
 
     def json(self):
         return {'id': self.id, 'funding_post': self.funding_post, 'date': self.date, 'amount': self.amount, 'requirement_description': self.requirement_description, 'num_of_slot': self.num_of_slot, 'professor_id': self.professor_id, 'availability': self.availability}

@@ -15,6 +15,8 @@ class OnGoingResearchModel(db.Model):
     num_of_students = db.Column(db.Integer, nullable=True)
     research_desc_link = db.Column(db.String(500), nullable=True)
     funding_id = db.Column(db.Integer, db.ForeignKey('funding.id'), nullable=True)
+    students_on_going_research = db.relationship('OnGoingResearchOfStudentModel', backref='ongoingresearchmodel', cascade='all, delete')
+    professor_on_going_research = db.relationship('OnGoingResearchOfProfessorModel', backref='ongoingresearchmodel', cascade='all, delete')
 
 
     def json(self):
