@@ -5,14 +5,14 @@ import re
 model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
 
 # Define the funding post's requirements and student's profile
-funding_requirements = "Keywords: NLP, LLM, TTP, cyber-security, ATP\nCGPA: 3.5\nGRE: 7\n..."
-student_profile = "Keywords: NLP, algorithms, phylogeny\nCGPA: 3.75\nGRE: 8\n..."
+funding_requirements = "Keywords: NLP, LLM, TTP, cyber-security,IoT, Networking, ATP\nCGPA: 3.5\nGRE: 7\n..."
+student_profile = "Keywords: NLP, LLM, algorithms, simulations\nCGPA: 3.4\nGRE: 8\n..."
 
 # Define weights for each aspect
 weights = {
-    "Keywords": 60,  # Higher priority
-    "CGPA": 60,
-    "GRE": 10,
+    "Keywords": 6,  # Higher priority
+    "CGPA": 3,
+    "GRE": 1,
 }
 
 # Extract keywords and scores from the requirements and profile
