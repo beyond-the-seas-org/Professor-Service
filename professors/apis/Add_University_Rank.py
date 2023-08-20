@@ -19,12 +19,12 @@ class Add_university_rank(Resource):
             new_university_rank.name = request.json['name']
             new_university_rank.rank = request.json['rank']
             
-            db.session.add(new_professor)
+            db.session.add(new_university_rank)
             db.session.commit()
 
 
-            return jsonify(new_professor.json())
+            return jsonify(new_university_rank.json())
         except Exception as e:
-            print({"message":"exception occured in add_professor"})
+            print({"message":"exception occured in add_university_rank"})
             print(e)
-            return jsonify({"message":"exception occured in add_professor"})
+            return jsonify({"message":"exception occured in add_university_rank"})
