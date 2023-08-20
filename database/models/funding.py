@@ -9,10 +9,10 @@ class FundingModel(db.Model):
     __tablename__ = 'funding'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    funding_post = db.Column(db.String(1000), nullable=False)
+    funding_post = db.Column(db.String(30000), nullable=False)
     date = db.Column(db.DateTime)
     amount = db.Column(db.Integer, nullable=False)
-    requirement_description = db.Column(db.String(1000), nullable=False)
+    requirement_description = db.Column(db.String(5000), nullable=False)
     num_of_slot = db.Column(db.Integer, nullable=False)
     professor_id = db.Column(db.Integer, db.ForeignKey('professor.id'), nullable=False)
     availability = db.Column(db.Boolean, nullable=False)

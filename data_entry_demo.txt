@@ -1,0 +1,68 @@
+http://127.0.0.1:5000/api/professors/add_website
+POST
+{
+    "professor_id": 2,
+    "website_link": "http://www.cs.cmu.edu/~./yiming/",
+    "website_type": "personal"
+}
+
+
+http://127.0.0.1:5000/api/professors/add_publication
+POST
+{
+    "title": "Rethinking Transformer-based Set Prediction for Object Detection",
+    "doi": "10.1109/ICCV48922.2021.00359", 
+    "link": "https://ieeexplore.ieee.org/document/9710041/keywords#keywords",
+    "abstract": "DETR is a recently proposed Transformer-based method which views object detection as a set prediction problem and achieves state-of-the-art performance but demands extra-long training time to converge. In this paper, we investigate the causes of the optimization difficulty in the training of DETR. Our examinations reveal several factors contributing to the slow convergence of DETR, primarily the issues with the Hungarian loss and the Transformer cross-attention mechanism. To overcome these issues we propose two solutions, namely, TSP-FCOS (Transformer-based Set Prediction with FCOS) and TSP-RCNN (Transformer-based Set Prediction with RCNN). Experimental results show that the proposed methods not only converge much faster than the original DETR, but also significantly outperform DETR and other baselines in terms of detection accuracy. Code is released at https://github.com/Edward-Sun/TSP-Detection.",
+    "date": "28 February 2022", 
+    "venue": "IEEE",
+    "citation": 83,
+    "keywords": "Detection and localization in 2D and 3D, Computer vision, Computational modeling",
+    "research_area": "Computer vision"
+}
+
+http://127.0.0.1:5000/api/professors/add_professor_publication
+POST
+{
+    "publication_id": 1,
+    "professor_id": 2
+}
+
+http://127.0.0.1:5000/api/professors/add_funding
+POST
+{
+    "funding_post": "Are you passionate about advancing the field of artificial intelligence and solving complex optimization problems? We're thrilled to announce a unique funding opportunity for students interested in exploring the exciting intersection of Neural Network Learning and Combinatorial Optimization.",
+    "date": "August 20, 2023",
+    "amount": 5000,
+    "requirement_description": "Combinatorial optimization problems are ubiquitous across various industries, ranging from logistics and transportation to finance and engineering. This research project seeks to leverage the capabilities of neural networks to develop novel approaches for solving these intricate problems more efficiently and effectively than traditional methods. By combining the strengths of artificial intelligence and optimization, we aim to push the boundaries of what's possible and create innovative solutions with real-world impact.",
+    "num_of_slot": 10,
+    "professor_id": 2,
+    "availability": true
+}
+
+http://127.0.0.1:5000/api/professors/add_on_going_research
+POST
+{
+    "research_topic": "Neural Network Learning for Combinatorial Optimization",
+    "research_field": "Artificial Intelligence, Optimization",
+    "description" : "Combinatorial optimization problems are pervasive across various industries and sectors, and finding efficient solutions to these complex challenges is of paramount importance. Our ongoing research delves into the fascinating world of neural network learning applied to combinatorial optimization. By seamlessly integrating artificial intelligence and optimization techniques, we're pushing the boundaries of what's achievable and striving to create innovative solutions with tangible real-world impact.In this research project, participants will have the opportunity to: Explore state-of-the-art techniques in neural networks and optimization.Develop novel algorithms that leverage neural networks to tackle combinatorial optimization problems.Collaborate with a diverse team of experts and fellow researchers.Contribute to groundbreaking advancements that have the potential to revolutionize industries.",
+    "num_of_students": 6,
+    "research_desc_link": "https://ai.googleblog.com/2023/08/neural-network-pruning-with.html",
+    "funding_id": 1
+}
+
+
+http://127.0.0.1:5000/api/professors/add_on_going_research_professor
+POST
+{
+    "professor_id": 2,
+    "on_going_research_id": 1
+}
+
+http://127.0.0.1:5000/api/professors/add_feedback
+POST
+{
+    "professor_id": 2,
+    "profile_id": 1,
+    "feedback": "Working alongside Professor Yiming Yang was an incredible experience. Their guidance, expertise, and passion for the subject were truly inspiring. The research project provided a platform for me to not only deepen my knowledge of AI and optimization but also to contribute to a meaningful endeavor that could change how we approach complex challenges. The collaborative atmosphere fostered rich discussions and a sense of camaraderie among fellow researchers. I can't recommend this opportunity enough to those who aspire to make a lasting impact in the field of AI-driven optimization."
+}

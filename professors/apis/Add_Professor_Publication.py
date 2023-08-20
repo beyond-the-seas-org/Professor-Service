@@ -8,7 +8,7 @@ from professors.models.professor_publications import *
 #this class is for adding new publication into database
 """
 primary key: id
-other fields: publication_id
+other fields: publication_id, professor_id
 """
 
 class Add_professor_publication(Resource):
@@ -21,6 +21,7 @@ class Add_professor_publication(Resource):
             #create new publication object
             new_publication = ProfessorPublicationModel()
             new_publication.publication_id = request.json['publication_id']
+            new_publication.professor_id = request.json['professor_id']
             
             db.session.add(new_publication)
             db.session.commit()
