@@ -9,6 +9,7 @@ import requests
 
 from professors.models.professor import *
 from professors.models.field import *
+from professors.models.university_ranks import *
 
 #this class is for getting all professors from database
 
@@ -19,13 +20,24 @@ class Get_All_professor_short_details(Resource):
 
         try:
             #get all professors
-            all_professors_short_details = ProfessorModel.query.all()
-            #all_posts = db.session.query(StudentModel,PostModel,CommentModel,aliased_Student_model).filter(StudentModel.id == PostModel.profile_id).filter(CommentModel.post_id == PostModel.id).filter(CommentModel.profile_id == aliased_Student_model.id).order_by(PostModel.date.desc()).all()
-            
-            #get all fields
-            all_fields = FieldModel.query.all()
+            all_professors_short_details = db.session.query(ProfessorModel, UniversityRankModel).filter(ProfessorModel.university_id == UniversityRankModel.id).all()
 
-            return jsonify(all_professors.json())
+            print(all_professors_short_details)
+
+            #create json format
+            all_professors_short_details_json = []
+            for professor in all_professors_short_details:
+                all_professors_short_details_json.append({
+                    "id":professor[0].id,
+                    "name":professor[0].name,
+                    "university_id":professor[0].university_id,
+                    "university_name":professor[1].name,
+                    "university_rank":professor[1].rank
+                })
+            
+
+
+            return all_professors_short_details_json
         except Exception as e:
             print({"message":"exception occured in get_all_professor_short_details"})
             print(e)

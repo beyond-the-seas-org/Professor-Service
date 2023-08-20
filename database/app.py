@@ -28,6 +28,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 # Import models
-import models.funding, models.professor, models.on_going_research, models.on_going_researches_of_professor, models.on_going_researches_of_student, models.professor_area_of_interests, models.professor_feedback, models.publication, models.university_ranks, models.professor_publications, models.professor_website_link
+import models.funding, models.professor, models.on_going_research, models.on_going_researches_of_professor, models.on_going_researches_of_student, models.professor_area_of_interests, models.professor_feedback, models.publication, models.university_ranks, models.professor_publications, models.professor_website_link, models.field
 
 migrate = Migrate(app, db)

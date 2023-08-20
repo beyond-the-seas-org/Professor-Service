@@ -11,6 +11,7 @@ from professors.apis.Add_OnGoingResearch_Student import Add_on_going_research_st
 from professors.apis.Add_Professor_Website import Add_website
 from professors.apis.Add_Funding import Add_funding
 from professors.apis.Add_Field import Add_field
+from professors.apis.Get_Professor_Short_Details import Get_All_professor_short_details
 
 Professors = api.namespace('api/professors')
 Professors.add_resource(Add_professor,'/add_professor')
@@ -25,3 +26,4 @@ Professors.add_resource(Add_on_going_research_student,'/add_on_going_research_st
 Professors.add_resource(Add_website,'/add_website')
 Professors.add_resource(Add_funding,'/add_funding')
 Professors.add_resource(Add_field,'/add_field')
+Professors.add_resource(Get_All_professor_short_details,'/get_all_professor_short_details')

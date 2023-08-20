@@ -18,6 +18,7 @@ class Add_professor(Resource):
             #get the university id from university name
             university_name = request.json['university_name']
             university_id = UniversityRankModel.query.filter_by(name=university_name).first().id
+            print(university_id)
 
             #create new professor object
             new_professor = ProfessorModel()

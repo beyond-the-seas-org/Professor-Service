@@ -1,4 +1,4 @@
-from professors import db
+from professors import db 
 
 class FieldModel(db.Model):
 

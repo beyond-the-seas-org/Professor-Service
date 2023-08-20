@@ -18,6 +18,7 @@ class Add_university_rank(Resource):
             new_university_rank = UniversityRankModel()
             new_university_rank.name = request.json['name']
             new_university_rank.rank = request.json['rank']
+
             
             db.session.add(new_university_rank)
             db.session.commit()
