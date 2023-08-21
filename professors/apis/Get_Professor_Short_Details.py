@@ -48,10 +48,18 @@ class Get_All_professor_short_details(Resource):
                 field_names = [item for t in field_names for item in t]
                 print(field_names)
 
-                #get website links for each professor
-                website_links = db.session.query(ProfessorWebsiteLinkModel.id).filter(ProfessorWebsiteLinkModel.professor_id == professor[0].id).all()
-                #filter the commas from the list
-                website_links = [item for t in website_links for item in t]
+                #get website links based on professor id
+                professor_website_link_details = ProfessorWebsiteLinkModel.query.filter_by(professor_id=professor[0].id).all()
+
+                professor_website_link_details_json = []
+                #website_link, website_type
+                for website_link in professor_website_link_details:
+                    professor_website_link_details_json.append({
+                        "website_link":website_link.website_link,
+                        "website_type":website_link.website_type
+                    })
+
+                #get the links from the ids
 
                 all_professors_short_details_json.append({
                     "id":professor[0].id,
@@ -61,7 +69,7 @@ class Get_All_professor_short_details(Resource):
                     "university_name":professor[1].name,
                     "university_rank":professor[1].rank,
                     "field_names":field_names,
-                    "website_links":website_links,
+                    "website_links":professor_website_link_details_json,
                     "image_link":professor[0].image_link
                 })
             
