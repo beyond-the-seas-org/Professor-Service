@@ -110,9 +110,8 @@ class Get_a_professor_details(Resource):
                 })
 
             
-            #create json format
-            professor_details_json = []
-            professor_details_json.append({
+            #create json format using dictionary
+            professor_details_json = {
                 "id":professor_details[0].id,
                 "name":professor_details[0].name,
                 "email":professor_details[0].email,
@@ -120,12 +119,13 @@ class Get_a_professor_details(Resource):
                 "university_name":university_details[0].name,
                 "university_rank":university_details[0].rank,
                 "field_names":field_names,
-                "publications":publication_details,
-                "on_going_researches":on_going_research_details,
-                "funding":funding_details_json,
-                "feedback":professor_feedback_details_json,
-                "website_link":professor_website_link_details_json
-            })
+                "publication_details":publication_details,
+                "on_going_research_details":on_going_research_details,
+                "funding_details":funding_details_json,
+                "professor_feedback_details":professor_feedback_details_json,
+                "professor_website_link_details":professor_website_link_details_json,
+                "image_link":professor_details[0].image_link
+            }
 
             return jsonify(professor_details_json)
         except Exception as e:
