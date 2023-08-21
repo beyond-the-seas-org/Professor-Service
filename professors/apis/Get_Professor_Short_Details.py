@@ -11,6 +11,7 @@ from professors.models.professor import *
 from professors.models.field import *
 from professors.models.university_ranks import *
 from professors.models.professor_area_of_interests import *
+from professors.models.professor_website_link import *
 
 #this class is for getting all professors from database
 
@@ -20,10 +21,13 @@ class Get_All_professor_short_details(Resource):
     def get(self):
 
         try:
-            #get all professors
-            all_professors_short_details = db.session.query(ProfessorModel, UniversityRankModel).filter(ProfessorModel.university_id == UniversityRankModel.id).all()
+            #get all professors with sorted by university rank
+            all_professors_short_details = db.session.query(ProfessorModel, UniversityRankModel).join(UniversityRankModel, ProfessorModel.university_id == UniversityRankModel.id).order_by(ProfessorModel.name).all()
+            
 
             print(all_professors_short_details)
+
+
 
             
 
@@ -44,6 +48,11 @@ class Get_All_professor_short_details(Resource):
                 field_names = [item for t in field_names for item in t]
                 print(field_names)
 
+                #get website links for each professor
+                website_links = db.session.query(ProfessorWebsiteLinkModel.id).filter(ProfessorWebsiteLinkModel.professor_id == professor[0].id).all()
+                #filter the commas from the list
+                website_links = [item for t in website_links for item in t]
+
                 all_professors_short_details_json.append({
                     "id":professor[0].id,
                     "name":professor[0].name,
@@ -51,7 +60,8 @@ class Get_All_professor_short_details(Resource):
                     "university_id":professor[0].university_id,
                     "university_name":professor[1].name,
                     "university_rank":professor[1].rank,
-                    "field_names":field_names
+                    "field_names":field_names,
+                    "website_links":website_links
                 })
             
 

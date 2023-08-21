@@ -127,7 +127,7 @@ class Get_a_professor_details(Resource):
                 "website_link":professor_website_link_details_json
             })
 
-            return professor_details_json
+            return jsonify(professor_details_json)
         except Exception as e:
             print({"message":"exception occured in get_a_professor_details"})
             print(e)
