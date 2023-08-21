@@ -61,7 +61,8 @@ class Get_All_professor_short_details(Resource):
                     "university_name":professor[1].name,
                     "university_rank":professor[1].rank,
                     "field_names":field_names,
-                    "website_links":website_links
+                    "website_links":website_links,
+                    "image_link":professor[0].image_link
                 })
             
 
