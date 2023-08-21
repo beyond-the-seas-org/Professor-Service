@@ -79,6 +79,7 @@ class Get_a_professor_details(Resource):
             #fields: funding_post, date, amount, requirement_description, num_of_slot, professor_id, availability
             for funding in funding_details:
                 funding_details_json.append({
+                    "funding_id": funding.id,
                     "funding_post":funding.funding_post,
                     "date":funding.date.isoformat(),
                     "amount":funding.amount,

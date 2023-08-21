@@ -1,4 +1,4 @@
-from app import db 
+from professors import db 
 
 class StudentPublicationModel(db.Model):
     """

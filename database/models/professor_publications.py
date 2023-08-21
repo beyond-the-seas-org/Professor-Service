@@ -15,4 +15,4 @@ class ProfessorPublicationModel(db.Model):
 
 
     def json(self):
-        return {'id': self.id, 'publication_id': self.publication_id}
+        return {'id': self.id, 'publication_id': self.publication_id, 'professor_id': self.professor_id}
