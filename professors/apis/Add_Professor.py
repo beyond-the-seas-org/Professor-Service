@@ -26,6 +26,7 @@ class Add_professor(Resource):
             new_professor.email = request.json['email']
             new_professor.university_id = university_id
             new_professor.location_id = request.json['location_id']
+            new_professor.image_link = request.json['image_link']
 
             db.session.add(new_professor)
             db.session.commit()
