@@ -39,26 +39,18 @@ class Get_All_professor_short_details(Resource):
                 area_of_interest_ids = db.session.query(ProfessorAreaOfInterestModel.area_of_interest_id).filter(ProfessorAreaOfInterestModel.professor_id == professor[0].id).all()
                 #filter the commas from the list
                 area_of_interest_ids = [item for t in area_of_interest_ids for item in t]
-                print(area_of_interest_ids)
+                # print(area_of_interest_ids)
 
                 #get field names for each area of interest
                 
                 field_names = db.session.query(FieldModel.name).filter(FieldModel.id.in_(area_of_interest_ids)).all()
                 #filter the commas from the list
                 field_names = [item for t in field_names for item in t]
-                print(field_names)
+                # print(field_names)
 
-                #get website links based on professor id
-                professor_website_link_details = ProfessorWebsiteLinkModel.query.filter_by(professor_id=professor[0].id).all()
-
-                professor_website_link_details_json = []
-                #website_link, website_type
-                for website_link in professor_website_link_details:
-                    professor_website_link_details_json.append({
-                        "website_link":website_link.website_link,
-                        "website_type":website_link.website_type
-                    })
-
+                #get website link based on professor id where type = personal
+                professor_website_link = db.session.query(ProfessorWebsiteLinkModel.website_link).filter(ProfessorWebsiteLinkModel.professor_id == professor[0].id).filter(ProfessorWebsiteLinkModel.website_type == "personal").first()
+                professor_website_link = professor_website_link[0] if professor_website_link else None
                 #get the links from the ids
 
                 all_professors_short_details_json.append({
@@ -69,7 +61,7 @@ class Get_All_professor_short_details(Resource):
                     "university_name":professor[1].name,
                     "university_rank":professor[1].rank,
                     "field_names":field_names,
-                    "website_links":professor_website_link_details_json,
+                    "website_link": professor_website_link,
                     "image_link":professor[0].image_link
                 })
             

@@ -21,7 +21,10 @@ cs_terms = {
     "transportation", "finance", "engineering", "machine learning", "data mining", 
     "deep learning", "natural language processing", "algorithm", "computational", 
     "database", "security", "cryptography", "software engineering", "computer graphics", 
-    "quantum computing", "distributed systems"
+    "quantum computing", "distributed systems", "bioinformatics", "robotics", "computer vision",
+    "computer architecture", "operating systems", "computer networks", "human-computer interaction",
+    "computer science", "computer", "science", "computing", "computers", "software", "hardware",
+    
 }
 
 funding_post = """
