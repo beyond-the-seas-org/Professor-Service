@@ -57,6 +57,7 @@ class Get_All_professor_short_details(Resource):
                     "id":professor[0].id,
                     "name":professor[0].name,
                     "email":professor[0].email,
+                    "location": professor[0].location,
                     "university_id":professor[0].university_id,
                     "university_name":professor[1].name,
                     "university_rank":professor[1].rank,
