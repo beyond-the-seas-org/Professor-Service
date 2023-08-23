@@ -18,6 +18,7 @@ class FundingModel(db.Model):
     availability = db.Column(db.Boolean, nullable=False)
 
     ongoingresearch = db.relationship('OnGoingResearchModel', backref='fundingmodel', cascade='all, delete')
+    fundingfields = db.relationship('FundingFieldsModel', backref='fundingmodel', cascade='all, delete')
 
 
     def json(self):
