@@ -1,4 +1,16 @@
-http://127.0.0.1:5000/api/professors/add_website
+http://127.0.0.1:5002/api/professors/add_professor
+POST
+
+
+{
+    "university_name": "Boston University",
+    "location_name": "Boston",
+    "name": "Gianluca Stringhini",
+    "email": "gian@bu.edu",
+    "image_link": "https://seclab.bu.edu/people/gianluca/gianluca.png"
+}
+
+http://127.0.0.1:5002/api/professors/add_website
 POST
 {
     "professor_id": 2,
@@ -7,7 +19,7 @@ POST
 }
 
 
-http://127.0.0.1:5000/api/professors/add_publication
+http://127.0.0.1:5002/api/professors/add_publication
 POST
 {
     "title": "Rethinking Transformer-based Set Prediction for Object Detection",
@@ -21,14 +33,14 @@ POST
     "research_area": "Computer vision"
 }
 
-http://127.0.0.1:5000/api/professors/add_professor_publication
+http://127.0.0.1:5002/api/professors/add_professor_publication
 POST
 {
     "publication_id": 1,
     "professor_id": 2
 }
 
-http://127.0.0.1:5000/api/professors/add_funding
+http://127.0.0.1:5002/api/professors/add_funding
 POST
 {
     "funding_post": "Are you passionate about advancing the field of artificial intelligence and solving complex optimization problems? We're thrilled to announce a unique funding opportunity for students interested in exploring the exciting intersection of Neural Network Learning and Combinatorial Optimization.",
@@ -40,7 +52,7 @@ POST
     "availability": true
 }
 
-http://127.0.0.1:5000/api/professors/add_on_going_research
+http://127.0.0.1:5002/api/professors/add_on_going_research
 POST
 {
     "research_topic": "Neural Network Learning for Combinatorial Optimization",
@@ -52,14 +64,14 @@ POST
 }
 
 
-http://127.0.0.1:5000/api/professors/add_on_going_research_professor
+http://127.0.0.1:5002/api/professors/add_on_going_research_professor
 POST
 {
     "professor_id": 2,
     "on_going_research_id": 1
 }
 
-http://127.0.0.1:5000/api/professors/add_feedback
+http://127.0.0.1:5002/api/professors/add_feedback
 POST
 {
     "professor_id": 2,

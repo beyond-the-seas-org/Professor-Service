@@ -17,6 +17,14 @@ conn = psycopg2.connect(db_url, sslmode='prefer')
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+#This must be bind before the db = SQLAlchemy(app) line
+analytics_db_url = os.getenv('ANALYTICS_DATABASE_URL')
+app.config['SQLALCHEMY_BINDS'] = {
+    'analytics': analytics_db_url
+}
+
 db = SQLAlchemy(app)
+
+
 
 from professors.routes import *
