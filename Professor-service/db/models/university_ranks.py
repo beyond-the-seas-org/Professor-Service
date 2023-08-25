@@ -19,4 +19,4 @@ class UniversityRankModel(db.Model):
 
 
     def json(self):
-        return {'id': self.id, 'name': self.name, 'rank': self.rank, 'area_of_interest_id': self.area_of_interest_id}
+        return {'id': self.id, 'name': self.name, 'rank': self.rank, 'area_of_interest_id': self.area_of_interest_id,'location_id':self.location_id}

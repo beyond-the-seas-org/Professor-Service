@@ -13,8 +13,9 @@ class UniversityRankModel(db.Model):
     rank = db.Column(db.Integer, nullable=True)
     area_of_interest_id = db.Column(db.Integer, nullable=True)
     relation = db.relationship('ProfessorModel', backref='universityrankmodel', cascade='all, delete')
+    location_id = db.Column(db.Integer)
 
 
 
     def json(self):
-        return {'id': self.id, 'name': self.name, 'rank': self.rank, 'area_of_interest_id': self.area_of_interest_id}
+        return {'id': self.id, 'name': self.name, 'rank': self.rank, 'area_of_interest_id': self.area_of_interest_id,'location_id':self.location_id}
