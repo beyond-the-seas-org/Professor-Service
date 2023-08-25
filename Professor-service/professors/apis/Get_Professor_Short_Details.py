@@ -23,13 +23,6 @@ class Get_All_professor_short_details(Resource):
         try:
             #get all professors with sorted by university rank
             all_professors_short_details = db.session.query(ProfessorModel, UniversityRankModel).join(UniversityRankModel, ProfessorModel.university_id == UniversityRankModel.id).order_by(ProfessorModel.name).all()
-            
-
-            print(all_professors_short_details)
-
-
-
-            
 
             #create json format
             all_professors_short_details_json = []

@@ -19,6 +19,8 @@ from professors.apis.Get_Students_Research_Keywords import Get_students_research
 from professors.apis.Get_Funding_Analysis import Get_funding_analysis_keywords
 from professors.apis.Get_Student_Profile_Matching import Get_student_profile_matching
 from professors.apis.Get_Fundings import Get_fundings
+from professors.apis.Get_location_ids_based_on_field_of_interest import GetLocationsBasedOnFieldOfInterest
+
 
 Professors = api.namespace('api/professors')
 Professors.add_resource(Add_professor,'/add_professor')
@@ -41,3 +43,4 @@ Professors.add_resource(Get_students_research_keywords,'/<int:student_id>/get_st
 Professors.add_resource(Get_funding_analysis_keywords,'/<int:funding_id>/get_funding_analysis_keywords')
 Professors.add_resource(Get_student_profile_matching,'/<int:student_id>/<int:funding_id>/get_student_profile_matching')
 Professors.add_resource(Get_fundings,'/get_fundings')
+Professors.add_resource(GetLocationsBasedOnFieldOfInterest,'/get_location_ids_based_on_field_of_interest')
