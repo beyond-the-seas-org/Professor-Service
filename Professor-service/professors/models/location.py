@@ -13,15 +13,15 @@ class LocationModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     location_name = db.Column(db.String(50), nullable=False)
-    area_type = db.Column(db.String(50))
+    # area_type = db.Column(db.String(50))
     country_name = db.Column(db.String(30), nullable=False)
-    avg_living_cost = db.Column(db.Float)
-    public_transportation = db.Column(db.String(100))
-    population = db.Column(db.Integer)
-    avg_income = db.Column(db.Float)
-    summer_comfort_index = db.Column(db.Float) 
-    winter_comfort_index = db.Column(db.Float)
-    unemployment_rate = db.Column(db.Float)
+    # avg_living_cost = db.Column(db.Float)
+    # public_transportation = db.Column(db.String(100))
+    # population = db.Column(db.Integer)
+    # avg_income = db.Column(db.Float)
+    # summer_comfort_index = db.Column(db.Float) 
+    # winter_comfort_index = db.Column(db.Float)
+    # unemployment_rate = db.Column(db.Float)
 
 
     # create a json method
@@ -29,14 +29,14 @@ class LocationModel(db.Model):
         return {
             'id': self.id,
             'location_name': self.location_name,
-            'area_type': self.area_type,
-            'country_name': self.country_name,
-            'avg_living_cost': self.avg_living_cost,
-            'public_transportation':self.public_transportation,
-            'avg_income':self.avg_income,
-            'population':self.population,
-            'summer_comfort_index':self.summer_comfort_index,
-            'winter_comfort_index':self.winter_comfort_index,
-            'unemployment_rate': self.unemployment_rate
+            # 'area_type': self.area_type,
+            'country_name': self.country_name
+            # 'avg_living_cost': self.avg_living_cost,
+            # 'public_transportation':self.public_transportation,
+            # 'avg_income':self.avg_income,
+            # 'population':self.population,
+            # 'summer_comfort_index':self.summer_comfort_index,
+            # 'winter_comfort_index':self.winter_comfort_index,
+            # 'unemployment_rate': self.unemployment_rate
 
         }
