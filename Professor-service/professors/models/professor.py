@@ -3,7 +3,7 @@ from professors import db
 class ProfessorModel(db.Model):
     """
     primary key: id
-    other fields: name, email, university_id, location_id
+    other fields: name, email, university_id, image_link
     """
 
     __tablename__ = 'professor'
@@ -12,7 +12,6 @@ class ProfessorModel(db.Model):
     name = db.Column(db.String(200), nullable=False)
     email = db.Column(db.String(200), nullable=True)
     university_id = db.Column(db.Integer, db.ForeignKey('university_rank.id'), nullable=True)
-    location = db.Column(db.String(500), nullable=True)
     image_link = db.Column(db.String(500), nullable=True)
     website_relation = db.relationship('ProfessorWebsiteLinkModel', backref='professorwebsitelinkmodel', cascade='all, delete')
     feedback_relation = db.relationship('ProfessorFeedbackModel', backref='professorfeedbackmodel', cascade='all, delete')
@@ -20,4 +19,4 @@ class ProfessorModel(db.Model):
     funding_relation = db.relationship('FundingModel', backref='fundingmodel', cascade='all, delete')
 
     def json(self):
-        return {'id': self.id, 'name': self.name, 'email': self.email, 'university_id': self.university_id, 'location': self.location, 'image_link': self.image_link}
+        return {'id': self.id, 'name': self.name, 'email': self.email, 'university_id': self.university_id,'image_link': self.image_link}

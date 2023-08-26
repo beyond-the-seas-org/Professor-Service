@@ -15,14 +15,14 @@ from professors.models.professor_website_link import *
 
 #this class is for getting all professors from database
 
-class Get_All_professor_short_details(Resource):
+class Get_location_based_professors(Resource):
     @api.doc(responses={200: 'OK', 404: 'Not Found', 500: 'Internal Server Error'})
 
-    def get(self):
+    def get(self,location_id):
 
         try:
-            #get all professors with sorted by university rank
-            all_professors_short_details = db.session.query(ProfessorModel, UniversityRankModel).join(UniversityRankModel, ProfessorModel.university_id == UniversityRankModel.id).order_by(ProfessorModel.name).all()
+            #get all professors based on location_id with sorted by university rank
+            all_professors_short_details = db.session.query(ProfessorModel, UniversityRankModel).join(UniversityRankModel, ProfessorModel.university_id == UniversityRankModel.id).filter(UniversityRankModel.location_id == location_id).order_by(ProfessorModel.name).all()
 
             #create json format
             all_professors_short_details_json = []
@@ -44,19 +44,7 @@ class Get_All_professor_short_details(Resource):
                 #get website link based on professor id where type = personal
                 professor_website_link = db.session.query(ProfessorWebsiteLinkModel.website_link).filter(ProfessorWebsiteLinkModel.professor_id == professor[0].id).filter(ProfessorWebsiteLinkModel.website_type == "personal").first()
                 professor_website_link = professor_website_link[0] if professor_website_link else None
-                #get the location info from analytics
-                try:
-                    location_id = professor[1].location_id
-                    response = requests.get(f'http://localhost:5003/api/analytics/{location_id}/get_location_info')
-                    response = response.json()
-                    location_name = response['location_name']
-                    state_name = response['state_name']
-                    country_name = response['country_name']
-                    location_info = location_name + ", " + state_name + ", " + country_name
-                except Exception as e:
-                    print({"message":"exception occured in get_location_info"})
-                    print(e)
-                    location_info = None
+                #get the links from the ids
 
                 all_professors_short_details_json.append({
                     "id":professor[0].id,
@@ -67,8 +55,7 @@ class Get_All_professor_short_details(Resource):
                     "university_rank":professor[1].rank,
                     "field_names":field_names,
                     "website_link": professor_website_link,
-                    "image_link":professor[0].image_link,
-                    "location":location_info
+                    "image_link":professor[0].image_link
                 })
             
 

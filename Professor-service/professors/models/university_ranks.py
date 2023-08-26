@@ -3,7 +3,7 @@ from professors import db
 class UniversityRankModel(db.Model):
     """
     primary key: id
-    other fields: name, rank, area_of_interest_id
+    other fields: name, rank, area_of_interest_id, location
     """
 
     __tablename__ = 'university_rank'
@@ -12,8 +12,8 @@ class UniversityRankModel(db.Model):
     name = db.Column(db.String(200), nullable=False)
     rank = db.Column(db.Integer, nullable=True)
     area_of_interest_id = db.Column(db.Integer, nullable=True)
+    location_id = db.Column(db.Integer, nullable=True)   
     relation = db.relationship('ProfessorModel', backref='universityrankmodel', cascade='all, delete')
-    location_id = db.Column(db.Integer)
 
 
 
