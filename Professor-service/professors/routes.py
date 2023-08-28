@@ -21,6 +21,7 @@ from professors.apis.Get_Student_Profile_Matching import Get_student_profile_mat
 from professors.apis.Get_Fundings import Get_fundings
 from professors.apis.Get_location_ids_based_on_field_of_interest import GetLocationsBasedOnFieldOfInterest
 from professors.apis.Get_Location_Based_Professors import Get_location_based_professors
+from professors.apis.Get_all_fields import Get_all_fields
 
 
 Professors = api.namespace('api/professors')
@@ -46,3 +47,4 @@ Professors.add_resource(Get_student_profile_matching,'/<int:student_id>/<int:fun
 Professors.add_resource(Get_fundings,'/get_fundings')
 Professors.add_resource(GetLocationsBasedOnFieldOfInterest,'/get_location_ids_based_on_field_of_interest')
 Professors.add_resource(Get_location_based_professors,'/<int:location_id>/get_location_based_professors')
+Professors.add_resource(Get_all_fields,'/get_all_fields')
