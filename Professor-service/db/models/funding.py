@@ -17,7 +17,6 @@ class FundingModel(db.Model):
     professor_id = db.Column(db.Integer, db.ForeignKey('professor.id'), nullable=False)
     availability = db.Column(db.Boolean, nullable=False)
 
-    ongoingresearch = db.relationship('OnGoingResearchModel', backref='fundingmodel', cascade='all, delete')
     fundingfields = db.relationship('FundingFieldsModel', backref='fundingmodel', cascade='all, delete')
 
 
