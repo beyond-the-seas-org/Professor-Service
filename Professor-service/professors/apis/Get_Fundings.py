@@ -48,7 +48,6 @@ class Get_fundings(Resource):
                     "requirement_description": funding[0].requirement_description,
                     "num_of_slot": funding[0].num_of_slot,
                     "professor_name": funding[1].name,
-                    "location": funding[1].location,
                     "availability": funding[0].availability,
                     "field_names": funding[0].field_names,
                     "professor_image": funding[1].image_link
