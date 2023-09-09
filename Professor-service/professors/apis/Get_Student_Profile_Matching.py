@@ -9,6 +9,14 @@ from nltk.util import ngrams
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended.exceptions import NoAuthorizationError
+
+@api.errorhandler(NoAuthorizationError)
+def handle_auth_required(e):
+    return {"message": "Authorization token is missing"}, 401
+
+
 def jaccard_similarity(set1, set2):
     intersection = len(set1.intersection(set2))
     similarity = intersection / len(set2) * 100 if len(set2) != 0 else 0
@@ -38,7 +46,7 @@ def match_my_research_area(funding_keywords, student_keywords):
 
 class Get_student_profile_matching(Resource):
     @api.doc(responses={200: 'OK', 404: 'Not Found', 500: 'Internal Server Error'})
-
+    @jwt_required()
     def get(self, student_id, funding_id):
         try:
             funding_keywords = requests.get(f'http://127.0.0.1:5002/api/professors/{funding_id}/get_funding_analysis_keywords')

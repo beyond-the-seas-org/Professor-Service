@@ -40,16 +40,20 @@ Professors.add_resource(Add_website,'/add_website')
 Professors.add_resource(Add_funding,'/add_funding')
 Professors.add_resource(Add_field,'/add_field')
 Professors.add_resource(Get_All_professor_short_details,'/<int:user_id>/get_all_professor_short_details')
+
 Professors.add_resource(Get_a_professor_details,'/<int:professor_id>/get_a_professor_details')
+
 Professors.add_resource(Update_professor_image,'/<int:professor_id>/update_image')
 Professors.add_resource(Add_student_publication,'/add_student_publication')
 Professors.add_resource(Get_students_research_keywords,'/<int:student_id>/get_students_research_keywords')
 Professors.add_resource(Get_funding_analysis_keywords,'/<int:funding_id>/get_funding_analysis_keywords')
 Professors.add_resource(Get_student_profile_matching,'/<int:student_id>/<int:funding_id>/get_student_profile_matching')
+
 Professors.add_resource(Get_fundings,'/get_fundings')
 Professors.add_resource(GetLocationsBasedOnFieldOfInterest,'/get_location_ids_based_on_field_of_interest')
 Professors.add_resource(Get_location_based_professors,'/<int:location_id>/get_location_based_professors')
 Professors.add_resource(Get_all_fields,'/get_all_fields')
 Professors.add_resource(Add_funding_from_newsfeed,'/add_funding_from_newsfeed')
 Professors.add_resource(Get_Shortlisted_Professors_short_details,'/<int:user_id>/get_shortlisted_professors_short_details')
+
 

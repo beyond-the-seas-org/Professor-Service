@@ -15,17 +15,25 @@ from professors.models.professor_website_link import *
 
 #this class is for getting all professors from database
 
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended.exceptions import NoAuthorizationError
+
+@api.errorhandler(NoAuthorizationError)
+def handle_auth_required(e):
+    return {"message": "Authorization token is missing"}, 401
+
 class Get_All_professor_short_details(Resource):
     @api.doc(responses={200: 'OK', 404: 'Not Found', 500: 'Internal Server Error'})
-
+    @jwt_required()
     def get(self,user_id):
+        # print("inside get_all_professor_short_details")
 
         try:
             
             #at first the shortlisted professors ids are retrieved for this student because we need to show the shortlist status for each professor.Upon on this "shortlist status" for each professor it will be decided that "Add to shortlist" button will be shown or "Remove from shortlist" button will be shown for each professor in the frontend
 
             try:
-                response = requests.get(f'http://localhost:5001/api/profile/{user_id}/get_shortlisted_professors')
+                response = requests.get(f'http://127.0.0.1:5001/api/profile/{user_id}/get_shortlisted_professors')
                 response = response.json()
                 shortlisted_professors_ids = response['shortlisted_professors_ids']
                 
@@ -68,7 +76,7 @@ class Get_All_professor_short_details(Resource):
                 #get the location info from analytics
                 try:
                     location_id = professor[1].location_id
-                    response = requests.get(f'http://localhost:5003/api/analytics/{location_id}/get_location_info')
+                    response = requests.get(f'http://127.0.0.1:5003/api/analytics/{location_id}/get_location_info')
                     response = response.json()
                     location_name = response['location_name']
                     state_name = response['state_name']
