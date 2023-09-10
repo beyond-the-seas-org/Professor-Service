@@ -61,20 +61,21 @@ class Get_Shortlisted_Professors_short_details(Resource):
                 # professor_website_link = db.session.query(ProfessorWebsiteLinkModel.website_link).filter(ProfessorWebsiteLinkModel.professor_id == professor[0].id).filter(ProfessorWebsiteLinkModel.website_type == "personal").first()
                 # professor_website_link = professor_website_link[0] if professor_website_link else None
                 #get the location info from analytics
+                location_info = None
 
                 
-                try:
-                    location_id = professor[1].location_id
-                    response = requests.get(f'http://localhost:5003/api/analytics/{location_id}/get_location_info')
-                    response = response.json()
-                    location_name = response['location_name']
-                    state_name = response['state_name']
-                    country_name = response['country_name']
-                    location_info = location_name + ", " + state_name + ", " + country_name
-                except Exception as e:
-                    print({"message":"exception occured in get_location_info"})
-                    print(e)
-                    location_info = None
+                # try:
+                #     location_id = professor[1].location_id
+                #     response = requests.get(f'http://localhost:5003/api/analytics/{location_id}/get_location_info')
+                #     response = response.json()
+                #     location_name = response['location_name']
+                #     state_name = response['state_name']
+                #     country_name = response['country_name']
+                #     location_info = location_name + ", " + state_name + ", " + country_name
+                # except Exception as e:
+                #     print({"message":"exception occured in get_location_info"})
+                #     print(e)
+                #     location_info = None
 
                 all_professors_short_details_json.append({
                     "id":professor[0].id,

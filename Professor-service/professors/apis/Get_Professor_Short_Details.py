@@ -45,6 +45,8 @@ class Get_All_professor_short_details(Resource):
 
             #get all professors with sorted by university rank
             all_professors_short_details = db.session.query(ProfessorModel, UniversityRankModel).join(UniversityRankModel, ProfessorModel.university_id == UniversityRankModel.id).order_by(ProfessorModel.name).all()
+            all_professors_short_details = all_professors_short_details[:10]
+            professor_count = 0
 
             #create json format
             all_professors_short_details_json = []
@@ -69,22 +71,24 @@ class Get_All_professor_short_details(Resource):
 
                 #setting shortlist_status for this professor of this student
                 shortlist_status = False
+                location_info = None
+
                 if professor[0].id in shortlisted_professors_ids:
                     shortlist_status = True
                
                 #get the location info from analytics
-                try:
-                    location_id = professor[1].location_id
-                    response = requests.get(f'http://127.0.0.1:5003/api/analytics/{location_id}/get_location_info')
-                    response = response.json()
-                    location_name = response['location_name']
-                    state_name = response['state_name']
-                    country_name = response['country_name']
-                    location_info = location_name + ", " + state_name + ", " + country_name
-                except Exception as e:
-                    #print({"message":"exception occured in get_location_info"})
-                    print(e)
-                    location_info = None
+                # try:
+                #     location_id = professor[1].location_id
+                #     response = requests.get(f'http://127.0.0.1:5003/api/analytics/{location_id}/get_location_info')
+                #     response = response.json()
+                #     location_name = response['location_name']
+                #     state_name = response['state_name']
+                #     country_name = response['country_name']
+                #     location_info = location_name + ", " + state_name + ", " + country_name
+                # except Exception as e:
+                #     #print({"message":"exception occured in get_location_info"})
+                #     print(e)
+                #     location_info = None
 
                 all_professors_short_details_json.append({
                     "id":professor[0].id,
@@ -100,7 +104,11 @@ class Get_All_professor_short_details(Resource):
                     "shortlist_status":shortlist_status
 
                 })
+                # professor_count = professor_count + 1
+                # print("done ",professor_count)
             
+            
+
 
 
             return all_professors_short_details_json
