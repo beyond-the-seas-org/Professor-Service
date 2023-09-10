@@ -16,7 +16,6 @@ from professors.models.on_going_researches_of_professor import *
 from professors.models.professor_area_of_interests import *
 from professors.models.funding import *
 from professors.models.professor_feedback import *
-from professors.models.professor_website_link import *
 from professors.models.field import *
 
 from flask_jwt_extended import jwt_required
@@ -108,15 +107,17 @@ class Get_a_professor_details(Resource):
                     "profile_id":feedback.profile_id,
                     "feedback":feedback.feedback
                 })
-            professor_website_link_details = ProfessorWebsiteLinkModel.query.filter_by(professor_id=professor_id).all()
+            # professor_website_link_details = ProfessorWebsiteLinkModel.query.filter_by(professor_id=professor_id).all()
 
-            professor_website_link_details_json = []
-            #website_link, website_type
-            for website_link in professor_website_link_details:
-                professor_website_link_details_json.append({
-                    "website_link":website_link.website_link,
-                    "website_type":website_link.website_type
-                })
+            # professor_website_link_details_json = []
+            # #website_link, website_type
+            # for website_link in professor_website_link_details:
+            #     professor_website_link_details_json.append({
+            #         "website_link":website_link.website_link,
+            #         "website_type":website_link.website_type
+            #     })
+
+            professor_website_link_details_json = {"website_link":professor_details[0].website_link,"website_type":"personal"}
 
             
             #create json format using dictionary

@@ -11,9 +11,9 @@ class PublicationModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     title = db.Column(db.String(500), nullable=False, unique=True)
-    doi = db.Column(db.String(500), nullable=False, unique=True)
+    doi = db.Column(db.String(500))
     link = db.Column(db.String(500))
-    abstract = db.Column(db.String(5000))
+    abstract = db.Column(db.String(20000))
     date = db.Column(db.DateTime) # yyyy-mm-dd
     venue = db.Column(db.String(500))
     citation = db.Column(db.Integer)

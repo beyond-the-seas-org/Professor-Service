@@ -11,7 +11,6 @@ from professors.models.professor import *
 from professors.models.field import *
 from professors.models.university_ranks import *
 from professors.models.professor_area_of_interests import *
-from professors.models.professor_website_link import *
 
 #this class is for getting all professors from database
 
@@ -65,8 +64,8 @@ class Get_All_professor_short_details(Resource):
                 # print(field_names)
 
                 #get website link based on professor id where type = personal
-                professor_website_link = db.session.query(ProfessorWebsiteLinkModel.website_link).filter(ProfessorWebsiteLinkModel.professor_id == professor[0].id).filter(ProfessorWebsiteLinkModel.website_type == "personal").first()
-                professor_website_link = professor_website_link[0] if professor_website_link else None
+                # professor_website_link = db.session.query(ProfessorWebsiteLinkModel.website_link).filter(ProfessorWebsiteLinkModel.professor_id == professor[0].id).filter(ProfessorWebsiteLinkModel.website_type == "personal").first()
+                # professor_website_link = professor_website_link[0] if professor_website_link else None
 
                 #setting shortlist_status for this professor of this student
                 shortlist_status = False
@@ -95,7 +94,7 @@ class Get_All_professor_short_details(Resource):
                     "university_name":professor[1].name,
                     "university_rank":professor[1].rank,
                     "field_names":field_names,
-                    "website_link": professor_website_link,
+                    "website_link": professor[0].website_link,
                     "image_link":professor[0].image_link,
                     "location":location_info,
                     "shortlist_status":shortlist_status

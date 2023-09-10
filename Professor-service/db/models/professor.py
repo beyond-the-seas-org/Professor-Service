@@ -13,7 +13,7 @@ class ProfessorModel(db.Model):
     email = db.Column(db.String(200), nullable=True)
     university_id = db.Column(db.Integer, db.ForeignKey('university_rank.id'), nullable=True)
     image_link = db.Column(db.String(500), nullable=True)
-    website_relation = db.relationship('ProfessorWebsiteLinkModel', backref='professorwebsitelinkmodel', cascade='all, delete')
+    website_link = db.Column(db.String(500), nullable=True)
     feedback_relation = db.relationship('ProfessorFeedbackModel', backref='professorfeedbackmodel', cascade='all, delete')
     area_of_interest_relation = db.relationship('ProfessorAreaOfInterestModel', backref='professorareaofinterestmodel', cascade='all, delete')
     funding_relation = db.relationship('FundingModel', backref='fundingmodel', cascade='all, delete')
