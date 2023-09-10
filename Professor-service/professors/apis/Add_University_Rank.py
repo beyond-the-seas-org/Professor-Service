@@ -17,6 +17,11 @@ class Add_university_rank(Resource):
 
             universities = request.json
             for university in universities:
+                #checking if the university already exists
+                university_exists = UniversityRankModel.query.filter_by(name=university['name']).first()
+                if university_exists:
+                    continue
+                
                 #create new university rank object
                 new_university_rank = UniversityRankModel()
                 new_university_rank.name = university['name']

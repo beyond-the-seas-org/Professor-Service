@@ -8,9 +8,8 @@ from professors.apis.Add_Professor_Area_of_interest import Add_area_of_interest
 from professors.apis.Add_OnGoingResearch import Add_on_going_research
 from professors.apis.Add_OnGoingResearch_Professor import Add_on_going_research_professor
 from professors.apis.Add_OnGoingResearch_Student import Add_on_going_research_student
-from professors.apis.Add_Professor_Website import Add_website
 from professors.apis.Add_Funding import Add_funding
-from professors.apis.Add_Field import Add_field
+from professors.apis.Add_Fields import Add_fields
 from professors.apis.Get_Professor_Short_Details import Get_All_professor_short_details
 from professors.apis.Get_A_Professor_Details import Get_a_professor_details
 from professors.apis.Update_Professor_Image import Update_professor_image
@@ -24,9 +23,13 @@ from professors.apis.Get_Location_Based_Professors import Get_location_based_pro
 from professors.apis.Get_all_fields import Get_all_fields
 from professors.apis.Add_Funding_From_Newsfeed import Add_funding_from_newsfeed
 from professors.apis.Get_Shortlisted_Professors_Short_Details import Get_Shortlisted_Professors_short_details
+from professors.apis.Add_professors_complete_info import Add_professors_complete_info
+from professors.apis.Add_all_publications import Add_all_publications
 
 
 Professors = api.namespace('api/professors')
+Professors.add_resource(Add_professors_complete_info,'/add_professors_complete_info')
+Professors.add_resource(Add_all_publications,'/add_all_publications')
 Professors.add_resource(Add_professor,'/add_professor')
 Professors.add_resource(Add_university_rank,'/add_university_rank')
 Professors.add_resource(Add_feedback,'/add_feedback')
@@ -36,9 +39,8 @@ Professors.add_resource(Add_area_of_interest,'/add_area_of_interest')
 Professors.add_resource(Add_on_going_research,'/add_on_going_research')
 Professors.add_resource(Add_on_going_research_professor,'/add_on_going_research_professor')
 Professors.add_resource(Add_on_going_research_student,'/add_on_going_research_student')
-Professors.add_resource(Add_website,'/add_website')
 Professors.add_resource(Add_funding,'/add_funding')
-Professors.add_resource(Add_field,'/add_field')
+Professors.add_resource(Add_fields,'/add_fields')
 Professors.add_resource(Get_All_professor_short_details,'/<int:user_id>/get_all_professor_short_details')
 
 Professors.add_resource(Get_a_professor_details,'/<int:professor_id>/get_a_professor_details')
