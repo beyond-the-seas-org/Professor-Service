@@ -28,7 +28,6 @@ class Add_publication(Resource):
             new_publication.venue = request.json['venue']
             new_publication.citation = request.json['citation']
             new_publication.keywords = request.json['keywords']
-            new_publication.research_area = request.json['research_area']
             
             db.session.add(new_publication)
             db.session.commit()
