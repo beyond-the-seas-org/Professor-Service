@@ -15,8 +15,13 @@ class Get_student_publications(Resource):
             #get all publication ids of the student
             publication_ids = StudentPublicationModel.query.filter_by(student_id=student_id).with_entities(StudentPublicationModel.publication_id).all()
 
+            #if there are no publications
+            if publication_ids == []:
+                return jsonify({"message":"no publications found"})
+
             #remove the comma from the tuple
             publication_ids = [item for t in publication_ids for item in t]
+
 
             #get all publications of the student
             publications = PublicationModel.query.filter(PublicationModel.id.in_(publication_ids)).all()
