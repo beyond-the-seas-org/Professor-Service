@@ -14,7 +14,7 @@ class Get_all_fields(Resource):
     def get(self):
 
         try:
-            all_fields = [field.name for field in FieldModel.query.all()]  
+            all_fields = [field.name for field in FieldModel.query.order_by(FieldModel.name.asc()).all()]  
             return jsonify({"fields":all_fields})  
         
         except Exception as e:
