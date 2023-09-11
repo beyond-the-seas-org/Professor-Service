@@ -44,6 +44,8 @@ def extract_keywords(text, cs_terms):
     # Combine the one-word and two-word phrases
     all_phrases = one_word_phrases + two_word_phrases
 
+    #make cs_terms into a list in lower case
+    cs_terms = [term.lower() for term in cs_terms]
     # Filter out the phrases based on the computer science terms list (case-insensitive)
     keywords = [phrase for phrase in all_phrases if phrase.lower() in cs_terms]
 
