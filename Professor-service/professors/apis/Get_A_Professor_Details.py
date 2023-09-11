@@ -32,8 +32,24 @@ class Get_a_professor_details(Resource):
     def get(self, professor_id):
 
         try:
+
+            token = request.headers.get('Authorization')
+            if token and token.startswith('Bearer '):
+                access_token = token.split(' ')[1]
+
             professor_details = ProfessorModel.query.filter_by(id=professor_id).all()
             university_details = UniversityRankModel.query.filter_by(id=professor_details[0].university_id).all()
+
+            location_id = university_details[0].location_id
+            response = requests.get(f'http://127.0.0.1:5003/api/analytics/{location_id}/get_location_info',
+                                    headers={'Authorization': f'Bearer {access_token}'})
+            if response.status_code == 401:
+                return {"message":"Invalid token"}, 401
+            response = response.json()
+            location_name = response['location_name']
+            state_name = response['state_name']
+            country_name = response['country_name']
+            location_info = location_name + ", " + state_name + ", " + country_name
 
             area_of_interest_ids = db.session.query(ProfessorAreaOfInterestModel.area_of_interest_id).filter(ProfessorAreaOfInterestModel.professor_id == professor_id).all()
             area_of_interest_ids = [interest_id for (interest_id,) in area_of_interest_ids]
@@ -134,7 +150,8 @@ class Get_a_professor_details(Resource):
                 "funding_details":funding_details_json,
                 "professor_feedback_details":professor_feedback_details_json,
                 "professor_website_link_details":professor_website_link_details_json,
-                "image_link":professor_details[0].image_link
+                "image_link":professor_details[0].image_link,
+                "location": location_info
             }
 
             return jsonify(professor_details_json)
