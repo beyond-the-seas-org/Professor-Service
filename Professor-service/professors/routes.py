@@ -55,7 +55,7 @@ Professors.add_resource(Get_student_profile_matching,'/<int:student_id>/<int:fun
 
 Professors.add_resource(Get_fundings,'/get_fundings')
 Professors.add_resource(GetLocationsBasedOnFieldOfInterest,'/get_location_ids_based_on_field_of_interest')
-Professors.add_resource(Get_location_based_professors,'/<int:location_id>/get_location_based_professors')
+Professors.add_resource(Get_location_based_professors,'/<int:user_id>/<int:location_id>/get_location_based_professors')
 Professors.add_resource(Get_all_fields,'/get_all_fields')
 Professors.add_resource(Add_funding_from_newsfeed,'/add_funding_from_newsfeed')
 Professors.add_resource(Get_Shortlisted_Professors_short_details,'/<int:user_id>/get_shortlisted_professors_short_details')

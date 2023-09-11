@@ -30,15 +30,16 @@ class Get_All_professor_short_details(Resource):
         try:
             
             #at first the shortlisted professors ids are retrieved for this student because we need to show the shortlist status for each professor.Upon on this "shortlist status" for each professor it will be decided that "Add to shortlist" button will be shown or "Remove from shortlist" button will be shown for each professor in the frontend
+            token = request.headers.get('Authorization')
+            if token and token.startswith('Bearer '):
+                access_token = token.split(' ')[1]
 
             try:
                 response = requests.get(f'http://127.0.0.1:5001/api/profile/{user_id}/get_shortlisted_professors')
                 response = response.json()
                 shortlisted_professors_ids = response['shortlisted_professors_ids']
 
-                token = request.headers.get('Authorization')
-                if token and token.startswith('Bearer '):
-                    access_token = token.split(' ')[1]
+               
                 
 
             except Exception as e:

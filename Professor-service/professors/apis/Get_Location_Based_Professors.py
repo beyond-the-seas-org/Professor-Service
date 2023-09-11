@@ -17,9 +17,30 @@ from professors.models.professor_area_of_interests import *
 class Get_location_based_professors(Resource):
     @api.doc(responses={200: 'OK', 404: 'Not Found', 500: 'Internal Server Error'})
 
-    def get(self,location_id):
+    def get(self,user_id,location_id):
+        token = request.headers.get('Authorization')
+        if token and token.startswith('Bearer '):
+            access_token = token.split(' ')[1]
 
         try:
+
+             #at first the shortlisted professors ids are retrieved for this student because we need to show the shortlist status for each professor.Upon on this "shortlist status" for each professor it will be decided that "Add to shortlist" button will be shown or "Remove from shortlist" button will be shown for each professor in the frontend
+           
+
+            try:
+                response = requests.get(f'http://127.0.0.1:5001/api/profile/{user_id}/get_shortlisted_professors')
+                response = response.json()
+                shortlisted_professors_ids = response['shortlisted_professors_ids']
+
+               
+                
+
+            except Exception as e:
+                #print({"message":"exception occured in get_shortlisted_professors"})
+                print(e)
+                shortlisted_status = False
+
+
             #get all professors based on location_id with sorted by university rank
             all_professors_short_details = db.session.query(ProfessorModel, UniversityRankModel).join(UniversityRankModel, ProfessorModel.university_id == UniversityRankModel.id).filter(UniversityRankModel.location_id == location_id).order_by(ProfessorModel.name).all()
 
@@ -45,6 +66,29 @@ class Get_location_based_professors(Resource):
                 # professor_website_link = professor_website_link[0] if professor_website_link else None
                 #get the links from the ids
 
+                #setting shortlist_status for this professor of this student
+                shortlist_status = False
+                if professor[0].id in shortlisted_professors_ids:
+                    shortlist_status = True
+
+                 #get the location info from analytics
+                try:
+                    location_id = professor[1].location_id
+                    response = requests.get(f'http://127.0.0.1:5003/api/analytics/{location_id}/get_location_info',
+                                            headers={'Authorization': f'Bearer {access_token}'})
+                    if response.status_code == 401:
+                        return {"message":"Invalid token"}, 401
+                    response = response.json()
+                    location_name = response['location_name']
+                    state_name = response['state_name']
+                    country_name = response['country_name']
+                    location_info = location_name + ", " + state_name + ", " + country_name
+                except Exception as e:
+                    #print({"message":"exception occured in get_location_info"})
+                    print(e)
+                    location_info = None
+
+
                 all_professors_short_details_json.append({
                     "id":professor[0].id,
                     "name":professor[0].name,
@@ -54,7 +98,9 @@ class Get_location_based_professors(Resource):
                     "university_rank":professor[1].rank,
                     "field_names":field_names,
                     "website_link": professor[0].website_link,
-                    "image_link":professor[0].image_link
+                    "image_link":professor[0].image_link,
+                    "location":location_info,
+                    "shortlist_status":shortlist_status,
                 })
             
 
