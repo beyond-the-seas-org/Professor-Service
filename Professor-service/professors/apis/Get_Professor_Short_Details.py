@@ -46,9 +46,16 @@ class Get_All_professor_short_details(Resource):
                 print(e)
                 shortlisted_status = False
 
+            page = int(request.args.get('page', 1))  # Get the page parameter (default to 1)
+            page_size = int(request.args.get('pageSize', 20))  # Get the pageSize parameter (default to 20)
+            start_index = (page - 1) * page_size 
+            end_index = page * page_size
+
+            #get professors from id start_index to end_index with sorted by university rank
+            all_professors_short_details = db.session.query(ProfessorModel, UniversityRankModel).join(UniversityRankModel, ProfessorModel.university_id == UniversityRankModel.id).order_by(ProfessorModel.name).slice(start_index, end_index).all()
 
             #get all professors with sorted by university rank
-            all_professors_short_details = db.session.query(ProfessorModel, UniversityRankModel).join(UniversityRankModel, ProfessorModel.university_id == UniversityRankModel.id).order_by(ProfessorModel.name).all()
+            # all_professors_short_details = db.session.query(ProfessorModel, UniversityRankModel).join(UniversityRankModel, ProfessorModel.university_id == UniversityRankModel.id).order_by(ProfessorModel.name).all()
 
             #create json format
             all_professors_short_details_json = []
