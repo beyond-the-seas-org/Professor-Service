@@ -13,10 +13,17 @@ from professors.models.university_ranks import *
 from professors.models.professor_area_of_interests import *
 
 #this class is for getting all professors from database
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended.exceptions import NoAuthorizationError
+
+@api.errorhandler(NoAuthorizationError)
+def handle_auth_required(e):
+    return {"message": "Authorization token is missing"}, 401
 
 class Get_location_based_professors(Resource):
     @api.doc(responses={200: 'OK', 404: 'Not Found', 500: 'Internal Server Error'})
 
+    @jwt_required()
     def get(self,user_id,location_id):
         token = request.headers.get('Authorization')
         if token and token.startswith('Bearer '):
