@@ -59,8 +59,6 @@ class Add_funding_from_newsfeed(Resource):
             #retrieve data from request of the newsfeed service
             funding_post = request.json['funding_post']
             extracted_funding_details = extract_funding_details(funding_post)
-
-            print(extracted_funding_details)
             professor = extracted_funding_details['professor']
             #check if professor exists in database and get professor id
             professor_obj = ProfessorModel.query.filter(ProfessorModel.name.like(f"%{professor}%")).first()
