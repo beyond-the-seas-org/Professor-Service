@@ -27,7 +27,7 @@ from professors.apis.Add_professors_complete_info import Add_professors_complete
 from professors.apis.Add_all_publications import Add_all_publications
 from professors.apis.Get_Student_Publications import Get_student_publications
 from professors.apis.Get_Student_Fields import Get_student_fields
-
+from professors.apis.Get_All_Keywords import Get_All_Keywords
 
 Professors = api.namespace('api/professors')
 Professors.add_resource(Add_professors_complete_info,'/add_professors_complete_info')
@@ -61,3 +61,4 @@ Professors.add_resource(Add_funding_from_newsfeed,'/add_funding_from_newsfeed')
 Professors.add_resource(Get_Shortlisted_Professors_short_details,'/<int:user_id>/get_shortlisted_professors_short_details')
 Professors.add_resource(Get_student_publications,'/<int:student_id>/get_student_publications')
 Professors.add_resource(Get_student_fields,'/<int:student_id>/get_student_fields')
+Professors.add_resource(Get_All_Keywords,'/get_all_keywords')

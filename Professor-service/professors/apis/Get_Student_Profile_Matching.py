@@ -31,7 +31,7 @@ def match_my_research_area(funding_keywords, student_keywords):
     similarity_score = jaccard_similarity(student_set, funding_set)
     matched_keywords = list(funding_set.intersection(student_set))
     print(matched_keywords)
-    return similarity_score
+    return similarity_score, matched_keywords
 
 # def calculate_cosine_similarity(keyword_set1, keyword_set2):
 #     tfidf_vectorizer = TfidfVectorizer()
@@ -66,9 +66,9 @@ class Get_student_profile_matching(Resource):
             #make all the funding keywords in a comma separated string
             funding_keywords = ", ".join(funding_keywords)            
 
-            similarity = match_my_research_area(funding_keywords, student_keywords)
+            similarity, matched_keywords = match_my_research_area(funding_keywords, student_keywords)
 
-            return jsonify({"similarity":similarity})
+            return jsonify({"similarity":similarity, "matched_keywords":matched_keywords})
         except Exception as e:
             print({"message":"exception occured in get_student_profile_matching"})
             print(e)
