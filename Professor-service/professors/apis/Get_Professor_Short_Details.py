@@ -35,6 +35,10 @@ class Get_All_professor_short_details(Resource):
                 response = requests.get(f'http://127.0.0.1:5001/api/profile/{user_id}/get_shortlisted_professors')
                 response = response.json()
                 shortlisted_professors_ids = response['shortlisted_professors_ids']
+
+                token = request.headers.get('Authorization')
+                if token and token.startswith('Bearer '):
+                    access_token = token.split(' ')[1]
                 
 
             except Exception as e:
@@ -75,7 +79,10 @@ class Get_All_professor_short_details(Resource):
                 #get the location info from analytics
                 try:
                     location_id = professor[1].location_id
-                    response = requests.get(f'http://127.0.0.1:5003/api/analytics/{location_id}/get_location_info')
+                    response = requests.get(f'http://127.0.0.1:5003/api/analytics/{location_id}/get_location_info',
+                                            headers={'Authorization': f'Bearer {access_token}'})
+                    if response.status_code == 401:
+                        return {"message":"Invalid token"}, 401
                     response = response.json()
                     location_name = response['location_name']
                     state_name = response['state_name']
